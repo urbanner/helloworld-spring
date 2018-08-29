@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:app="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <bean id="engine" class="org.su.helloworld.PetrolEngine"/>
+
+    <bean id="car" class="org.su.helloworld.Car">
+        <constructor-arg name="engine" ref="engine"/>
+    </bean>
+
+    <bean id="timer" class="org.su.helloworld.Timer"/>
+
+    <app:config>
+        <app:aspect ref="timer">
+            <app:around method="measure" pointcut="bean(car)"/>
+        </app:aspect>
+    </app:config>
+
+</beans>
